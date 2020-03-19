@@ -8,3 +8,19 @@
 
 require 'faker'
 
+
+10.times do
+    User.create(name: Faker::Name.first_name, household_number: rand(10))
+    Container.create(name: Faker::House.room)
+end
+
+10.times do
+    cont = Container.all.sample
+    Category.create(name: Faker::Food.dish, container_id: cont.id)
+end
+
+10.times do
+    user_one = User.all.sample
+    cate = Category.all.sample
+    FoodItem.create(name: Faker::Food.ingredient, quantity: rand(5), expiration_date: Time.at(rand * Time.now.to_i), user_id: user_one.id, category_id: cate.id)
+end
